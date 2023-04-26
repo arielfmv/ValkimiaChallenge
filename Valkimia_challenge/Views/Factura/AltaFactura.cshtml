@@ -1,0 +1,45 @@
+﻿@model Valkimia_App.Models.ViewModels.FacturaViewModel
+@{
+    ViewBag.Title = "Alta Factura";
+}
+
+<div class="container">
+    <div class="row">
+        <div class="col-sm-12">
+            <h3>Registro de una nueva Factura</h3>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-12">
+            @if (TempData.ContainsKey("Mensaje"))
+            {
+                <div class="alert alert-info">@TempData["Mensaje"]</div>
+            }
+            @using (Html.BeginForm("AltaFactura", "Factura", FormMethod.Post))
+            {
+                @Html.AntiForgeryToken()
+                @Html.ValidationMessage("error", new { @class = "text-danger" })
+                @Html.LabelFor(d => d.IdCliente)<br />
+                //@Html.DropDownList("IdCliente", (IEnumerable<SelectListItem>)ViewBag.ddlClientes)<br />
+                @Html.DropDownListFor(model => model.IdCliente, (IEnumerable<SelectListItem>)ViewBag.ListaClientes)<br />
+                @Html.LabelFor(d => d.Fecha)
+                @Html.TextBoxFor(d => d.Fecha, new { @class = "form-control", @placeholder = "FECHA", @type = "date" })
+                @Html.ValidationMessage("Fecha", new { @class = "text-danger" })<br />
+                @Html.LabelFor(d => d.Detalle)
+                @Html.TextBoxFor(d => d.Detalle, new { @class = "form-control", @placeholder = "DETALLE" })
+                @Html.ValidationMessage("Detalle", new { @class = "text-danger" })<br />
+                @Html.LabelFor(d => d.Importe)
+                @Html.TextBoxFor(d => d.Importe, new { @class = "form-control", @placeholder = "Importe", @type = "decimal" })
+                @Html.ValidationMessage("Importe", new { @class = "text-danger" })<br />
+
+                <br />
+                <br />
+                <div class="form-group">
+                    <input type="submit" value="Guardar" class="btn btn-primary" />
+                </div>
+
+            }
+        </div>
+    </div>
+</div>

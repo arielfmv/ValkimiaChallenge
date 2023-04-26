@@ -1,0 +1,46 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+}
+
+<h1>Iniciar Sesión</h1>
+
+<form asp-action="Login" asp-controller="Login" id="frm">
+    <div class="row">
+        <div class="form-group col-md-3">
+            <label asp-for="Email" class="control-label">Email</label>
+            <input type="text" asp-for="Email" name="user" class="form-control" />
+            <span asp-validation-for="Email" class="text-danger"></span>
+        </div>
+    </div>
+    <div class="row">
+        <div class="form-group col-md-3">
+            <label asp-for="Password" class="control-label">Contraseña</label>
+            <input type="password" asp-for="Password" name="pass" class="form-control" />
+            <span asp-validation-for="Password" class="text-danger"></span>
+        </div>
+    </div>
+    <div class="row">
+        <button type="submit" class="btn btn-primary" value="Login">Login</button>
+    </div>
+</form>
+
+@section scripts
+{
+    <script>
+    $(document).ready(function () {
+        $("#frm").submit(function (e) {
+            e.preventDefault();
+            url = "@Url.Content("~/Login/Loguearse")"
+            parametros = $(this).serialize();
+            $.post(url, parametros, function (data) {
+                if (data == "1") {
+                    document.location.href = "@Url.Content("~/")";
+                } else {
+                    alert(data);
+                }
+            })
+        })
+    })
+    </script>
+}

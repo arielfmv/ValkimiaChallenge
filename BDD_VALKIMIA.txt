@@ -1,0 +1,58 @@
+CREATE DATABASE Valkimia_challenge;
+GO
+
+USE Valkimia_challenge;
+GO
+
+CREATE TABLE Clientes (
+    Id uniqueidentifier  NOT NULL PRIMARY KEY DEFAULT newsequentialid(),
+    Nombre varchar(50)  NOT NULL,
+    Apellido varchar(50) NOT NULL,
+    Domicilio varchar(50) NOT NULL,
+    Email varchar(100) NOT NULL,
+    Password varchar(100) NOT NULL,
+    IdCiudad uniqueidentifier NOT NULL,
+    Habilitado bit NOT NULL
+);
+
+CREATE TABLE Ciudades (
+    Id uniqueidentifier  NOT NULL PRIMARY KEY DEFAULT newsequentialid(),
+    Nombre varchar(50) NOT NULL
+);
+
+CREATE TABLE Facturas (
+    Id uniqueidentifier  NOT NULL PRIMARY KEY DEFAULT newsequentialid(),
+    IdCliente uniqueidentifier NOT NULL,
+    Fecha datetime NOT NULL,
+    Detalle varchar(200) NOT NULL,
+    Importe decimal (18,2) NOT NULL
+);
+
+ALTER TABLE Clientes ADD CONSTRAINT FK_Clientes_Ciudades FOREIGN KEY (IdCiudad) REFERENCES Ciudades(Id);
+ALTER TABLE Facturas ADD CONSTRAINT FK_Facturas_Clientes FOREIGN KEY (IdCliente) REFERENCES Clientes(Id);
+
+
+insert into Ciudades (Id, Nombre) values (NEWID(),'Jujuy')
+insert into Ciudades (Id, Nombre) values (NEWID(),'La Pampa')
+insert into Ciudades (Id, Nombre) values (NEWID(),'Buenos Aires')
+insert into Ciudades (Id, Nombre) values (NEWID(),'Catamarca')
+insert into Ciudades (Id, Nombre) values (NEWID(),'Chaco')
+insert into Ciudades (Id, Nombre) values (NEWID(),'Chubut')
+insert into Ciudades (Id, Nombre) values (NEWID(),'Córdoba')
+insert into Ciudades (Id, Nombre) values (NEWID(),'Corrientes')
+insert into Ciudades (Id, Nombre) values (NEWID(),'Entre Ríos')
+insert into Ciudades (Id, Nombre) values (NEWID(),'Formosa')
+insert into Ciudades (Id, Nombre) values (NEWID(),'La Rioja')
+insert into Ciudades (Id, Nombre) values (NEWID(),'Mendoza')
+insert into Ciudades (Id, Nombre) values (NEWID(),'Misiones')
+insert into Ciudades (Id, Nombre) values (NEWID(),'Neuquén')
+insert into Ciudades (Id, Nombre) values (NEWID(),'Río Negro')
+insert into Ciudades (Id, Nombre) values (NEWID(),'Salta')
+insert into Ciudades (Id, Nombre) values (NEWID(),'San Juan')
+insert into Ciudades (Id, Nombre) values (NEWID(),'San Luis')
+insert into Ciudades (Id, Nombre) values (NEWID(),'Santa Cruz')
+insert into Ciudades (Id, Nombre) values (NEWID(),'Santa Fe')
+insert into Ciudades (Id, Nombre) values (NEWID(),'Santiago del Estero')
+insert into Ciudades (Id, Nombre) values (NEWID(),'Tierra del Fuego')
+insert into Ciudades (Id, Nombre) values (NEWID(),'Tucumán')
+insert into Ciudades (Id, Nombre) values (NEWID(),'Ciudad Autónoma de Buenos Aires (CABA)')

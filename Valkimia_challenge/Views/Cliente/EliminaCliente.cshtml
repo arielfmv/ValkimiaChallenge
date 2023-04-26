@@ -1,0 +1,49 @@
+﻿@model Valkimia_App.Models.ViewModels.ClienteViewModel
+@{
+    ViewBag.Title = "Eliminacion de Cliente";
+}
+
+<div class="container">
+    <div class="row">
+        <div class="col-sm-12">
+            <h3>Eliminación de Cliente</h3>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-12">
+            @if (TempData.ContainsKey("Mensaje"))
+            {
+                <div class="alert alert-info">@TempData["Mensaje"]</div>
+            }
+            @using (Html.BeginForm("EliminaCliente", "Cliente", FormMethod.Post, new { role = "form", @class = "" }))
+            {
+                @Html.HiddenFor(d => d.Id)
+                @Html.AntiForgeryToken()
+                @Html.ValidationMessage("error", new { @class = "text-danger" })
+                @Html.LabelFor(d => d.Nombre)
+                @Html.TextBoxFor(d => d.Nombre, new { @class = "form-control", @placeholder = "NOMBRE", @readonly = "readonly" })
+                @Html.ValidationMessage("Nombre", new { @class = "text-danger" })<br />
+                @Html.LabelFor(d => d.Apellido)
+                @Html.TextBoxFor(d => d.Apellido, new { @class = "form-control", @placeholder = "APELLIDO", @readonly = "readonly" })
+                @Html.ValidationMessage("Apellido", new { @class = "text-danger" })<br />
+                @Html.LabelFor(d => d.Email)
+                @Html.TextBoxFor(d => d.Email, new { @class = "form-control", @placeholder = "EMAIL", @readonly = "readonly" })
+                @Html.ValidationMessage("Email", new { @class = "text-danger" })<br />
+                @Html.LabelFor(d => d.Password)
+                @Html.TextBoxFor(d => d.Password, new { @class = "form-control", @placeholder = "CONTRASEÑA", @type = "password" })
+                @Html.ValidationMessage("Password", new { @class = "text-danger" })<br />
+                @Html.LabelFor(d => d.ConfirmaPassword)
+                @Html.TextBoxFor(d => d.ConfirmaPassword, new { @class = "form-control", @placeholder = "CONTRASEÑA", @type = "password" })
+                @Html.ValidationMessage("ConfirmaPassword", new { @class = "text-danger" })<br />
+
+                <br />
+                <br />
+                <div class="form-group">
+                    <input type="submit" value="Eliminar Cliente" class="btn btn-warning" name="EliminaCliente" />
+                </div>
+
+            }
+        </div>
+    </div>
+</div>
